@@ -1,10 +1,10 @@
-# Portafolio Interactivo Khan Academy 🎨
+# Portafolio Interactivo Khan Academy 
 
 Portafolio web interactivo y educativo que recopila y adapta 5 proyectos gráficos desarrollados originalmente en ProcessingJS (Khan Academy), migrados a estándares web modernos utilizando **HTML5 Canvas** y la librería **p5.js**.
 
 ---
 
-## 🚀 Proyectos Incluidos
+## Proyectos Incluidos
 
 1. **Rana**: Ilustración colorida basada en el desafío de la rana loca, utilizando primitivas geométricas y arcos.
 2. **Dientes de Conejo**: Simpático diseño de la cara de un conejo con orejas y dientes prominentes.
@@ -14,7 +14,7 @@ Portafolio web interactivo y educativo que recopila y adapta 5 proyectos gráfic
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 * **HTML5 Canvas**: Contenedor gráfico de mapa de bits de renderizado inmediato y contexto 2D.
 * **p5.js (v1.6.0)**: Biblioteca de JavaScript para la creación simplificada de bocetos interactivos.
@@ -23,7 +23,7 @@ Portafolio web interactivo y educativo que recopila y adapta 5 proyectos gráfic
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 ├── index.html       # Archivo único que contiene toda la estructura, estilos y lógica p5.js
@@ -32,7 +32,7 @@ Portafolio web interactivo y educativo que recopila y adapta 5 proyectos gráfic
 
 ---
 
-## 💻 Instrucciones de Ejecución Local
+## Instrucciones de Ejecución Local
 
 Para probar este proyecto en tu computadora de forma local:
 
@@ -45,7 +45,7 @@ Para probar este proyecto en tu computadora de forma local:
 
 ---
 
-## 🌐 Guía de Despliegue en GitHub Pages
+## Guía de Despliegue en GitHub Pages
 
 Para habilitar la visualización pública de tu sitio web de forma gratuita:
 
