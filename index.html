@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Khan Academy - Proyectos Interactivos de Gráficos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- p5.js Library for interactive graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md">
+                        <i class="fa-solid fa-code text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">KhanAcademy Web Lab</span>
+                        <span class="block text-xs text-slate-500">Portafolio Gráfico Estándar</span>
+                    </div>
+                </div>
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-slate-600 hover:text-indigo-600 font-medium transition">Inicio</a>
+                    <a href="#proyectos" class="text-slate-600 hover:text-indigo-600 font-medium transition">Galería Interactiva</a>
+                    <a href="#teoria" class="text-slate-600 hover:text-indigo-600 font-medium transition">Teoría & Conceptos</a>
+                    <a href="#dom-diagrama" class="text-slate-600 hover:text-indigo-600 font-medium transition">Diagrama DOM</a>
+                    <a href="#despliegue" class="text-slate-600 hover:text-indigo-600 font-medium transition">Guía de Despliegue</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-indigo-600 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#inicio" class="block py-2 text-slate-600 hover:text-indigo-600 font-medium">Inicio</a>
+            <a href="#proyectos" class="block py-2 text-slate-600 hover:text-indigo-600 font-medium">Galería Interactiva</a>
+            <a href="#teoria" class="block py-2 text-slate-600 hover:text-indigo-600 font-medium">Teoría & Conceptos</a>
+            <a href="#dom-diagrama" class="block py-2 text-slate-600 hover:text-indigo-600 font-medium">Diagrama DOM</a>
+            <a href="#despliegue" class="block py-2 text-slate-600 hover:text-indigo-600 font-medium">Guía de Despliegue</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-indigo-50/60 via-white to-slate-50 py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 mb-6">
+                    <i class="fa-solid fa-graduation-cap"></i> Adaptación Oficial Khan Academy
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                    De Sketches de Procesamiento a <span class="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Estándares Web Modernos</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed">
+                    Sitio web interactivo que recopila y adapta los 5 proyectos gráficos desarrollados originalmente en ProcessingJS (Khan Academy), ahora optimizados con <strong>HTML5 Canvas</strong> y la librería <strong>p5.js</strong>.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#proyectos" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-palette"></i> Ver Galería de Proyectos
+                    </a>
+                    <a href="#dom-diagrama" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-300 shadow-sm hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-sitemap"></i> Ver Diagrama DOM
+                    </a>
+                </div>
+            </div>
+            <!-- Quick Project Badges -->
+            <div class="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div onclick="switchProject(0)" class="cursor-pointer bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition text-center group">
+                    <div class="text-indigo-600 text-2xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-frog"></i></div>
+                    <div class="font-semibold text-sm text-slate-800">1. Rana</div>
+                </div>
+                <div onclick="switchProject(1)" class="cursor-pointer bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition text-center group">
+                    <div class="text-indigo-600 text-2xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-tooth"></i></div>
+                    <div class="font-semibold text-sm text-slate-800">2. Dientes de Conejo</div>
+                </div>
+                <div onclick="switchProject(2)" class="cursor-pointer bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition text-center group">
+                    <div class="text-indigo-600 text-2xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="font-semibold text-sm text-slate-800">3. ¿Qué hay de cena?</div>
+                </div>
+                <div onclick="switchProject(3)" class="cursor-pointer bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition text-center group">
+                    <div class="text-indigo-600 text-2xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-sun"></i></div>
+                    <div class="font-semibold text-sm text-slate-800">4. Día Nevado Soleado</div>
+                </div>
+                <div onclick="switchProject(4)" class="cursor-pointer bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition text-center group col-span-2 sm:col-span-1">
+                    <div class="text-indigo-600 text-2xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-snowman"></i></div>
+                    <div class="font-semibold text-sm text-slate-800">5. Muñeco de Nieve</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Projects Gallery & Viewer Section -->
+    <section id="proyectos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Galería de Gráficos Interactivos</h2>
+                <p class="text-slate-600 mt-2">Selecciona un proyecto para visualizar la ejecución en vivo en el lienzo y consultar sus enlaces de referencia en Khan Academy.</p>
+            </div>
+
+            <!-- Project Selector Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="switchProject(0)" id="tab-0" class="project-tab px-5 py-2.5 rounded-xl font-medium text-sm transition bg-indigo-600 text-white shadow-md">
+                    <i class="fa-solid fa-frog mr-2"></i> Rana
+                </button>
+                <button onclick="switchProject(1)" id="tab-1" class="project-tab px-5 py-2.5 rounded-xl font-medium text-sm transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-tooth mr-2"></i> Dientes de Conejo
+                </button>
+                <button onclick="switchProject(2)" id="tab-2" class="project-tab px-5 py-2.5 rounded-xl font-medium text-sm transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-utensils mr-2"></i> ¿Qué hay de cena?
+                </button>
+                <button onclick="switchProject(3)" id="tab-3" class="project-tab px-5 py-2.5 rounded-xl font-medium text-sm transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-sun mr-2"></i> Día Nevado Soleado
+                </button>
+                <button onclick="switchProject(4)" id="tab-4" class="project-tab px-5 py-2.5 rounded-xl font-medium text-sm transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    <i class="fa-solid fa-snowman mr-2"></i> Muñeco de Nieve
+                </button>
+            </div>
+
+            <!-- Display Workspace: Canvas + Details -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <!-- Canvas Container (Left Column) -->
+                <div class="lg:col-span-7 flex flex-col items-center justify-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div id="p5-canvas-wrapper" class="canvas-container w-full flex justify-center items-center min-h-[400px]">
+                        <!-- p5 canvas injected here -->
+                    </div>
+                    <div class="mt-4 flex items-center justify-between w-full text-xs text-slate-500 px-2">
+                        <span id="canvas-status"><i class="fa-solid fa-circle text-emerald-500 mr-1"></i> Sketch ejecutándose en tiempo real</span>
+                        <button onclick="restartSketch()" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition font-medium">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Reiniciar Animación
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Description & Links (Right Column) -->
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-md mb-3" id="project-badge">Proyecto 1 de 5</div>
+                        <h3 id="project-title" class="text-2xl font-bold text-slate-900 mb-3">Rana</h3>
+                        <p id="project-desc" class="text-slate-600 leading-relaxed mb-6">
+                            Ilustración detallada de una rana colorida basada en el desafío clásico de Khan Academy. Utiliza primitivas geométricas como arcos, elipses y polígonos con paletas de color armonizadas.
+                        </p>
+                        
+                        <!-- Khan Academy Original Link Box -->
+                        <div class="bg-white p-4 rounded-xl border border-indigo-100 shadow-sm">
+                            <div class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Enlace Original Khan Academy</div>
+                            <a id="project-ka-link" href="https://es.khanacademy.org/computer-programming/derivado-de-desafo-rana-loca/5184124695724032" target="_blank" class="text-sm font-medium text-slate-700 hover:text-indigo-600 flex items-center gap-2 break-all">
+                                <i class="fa-solid fa-external-link-alt text-indigo-500 shrink-0"></i>
+                                <span id="project-ka-url-text">https://es.khanacademy.org/computer-programming/derivado-de-desafo-rana-loca/5184124695724032</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 pt-6">
+                        <h4 class="text-sm font-semibold text-slate-800 mb-2">Técnicas Web Aplicadas:</h4>
+                        <div class="flex flex-wrap gap-2" id="project-tags">
+                            <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-md">p5.js setup() & draw()</span>
+                            <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-md">Primitivas 2D</span>
+                            <span class="px-2.5 py-1 bg-white border border-slate-200 text-slate-600 text-xs rounded-md">Relleno y trazo RGB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOM Hierarchical Diagram Section (New Feature) -->
+    <section id="dom-diagrama" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 mb-3 border border-indigo-500/30">
+                    <i class="fa-solid fa-sitemap"></i> Arquitectura del Documento
+                </span>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Diagrama Jerárquico del DOM (Document Object Model)</h2>
+                <p class="text-slate-400 mt-2">Visualización en árbol de la estructura de nodos HTML que componen este portafolio web interactivo.</p>
+            </div>
+
+            <!-- DOM Tree Container -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-md overflow-x-auto">
+                <div class="min-w-[700px] flex flex-col items-center space-y-6">
+                    
+                    <!-- Root Node: document / html -->
+                    <div class="dom-node bg-indigo-600 text-white px-5 py-3 rounded-xl shadow-lg border border-indigo-400 text-center">
+                        <span class="text-xs uppercase font-mono tracking-widest text-indigo-200 block">Root Node</span>
+                        <span class="font-bold text-sm"><i class="fa-solid fa-globe mr-1.5"></i> html [lang="es"]</span>
+                    </div>
+                    <div class="w-0.5 h-8 bg-slate-600"></div>
+
+                    <!-- Level 1: head & body -->
+                    <div class="flex justify-center gap-16 w-full">
+                        <!-- HEAD Branch -->
+                        <div class="flex flex-col items-center">
+                            <div class="dom-node bg-slate-700 hover:bg-slate-600 transition text-slate-100 px-4 py-2.5 rounded-xl shadow border border-slate-600 text-center">
+                                <span class="text-xs uppercase font-mono text-indigo-300 block">Metadata Branch</span>
+                                <span class="font-semibold text-xs"><i class="fa-solid fa-code mr-1"></i> &lt;head&gt;</span>
+                            </div>
+                            <div class="w-0.5 h-6 bg-slate-600"></div>
+                            <div class="flex flex-col gap-2 items-center bg-slate-900/60 p-3 rounded-xl border border-slate-700/60 text-xs text-slate-300 w-52 font-mono">
+                                <div>&bull; &lt;meta charset&gt;</div>
+                                <div>&bull; &lt;meta viewport&gt;</div>
+                                <div>&bull; &lt;title&gt; Portafolio</div>
+                                <div>&bull; &lt;script&gt; Tailwind</div>
+                                <div>&bull; &lt;link&gt; FontAwesome</div>
+                                <div>&bull; &lt;script&gt; p5.js</div>
+                                <div>&bull; &lt;link&gt; style.css</div>
+                            </div>
+                        </div>
+
+                        <!-- BODY Branch -->
+                        <div class="flex flex-col items-center">
+                            <div class="dom-node bg-indigo-900/80 hover:bg-indigo-900 transition text-indigo-100 px-4 py-2.5 rounded-xl shadow border border-indigo-700 text-center">
+                                <span class="text-xs uppercase font-mono text-indigo-300 block">Content Branch</span>
+                                <span class="font-semibold text-xs"><i class="fa-solid fa-window-maximize mr-1"></i> &lt;body class="..."&gt;</span>
+                            </div>
+                            <div class="w-0.5 h-6 bg-slate-600"></div>
+                            
+                            <!-- Body Children Grid/Flex -->
+                            <div class="grid grid-cols-2 gap-3 w-full max-w-md">
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;header&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Barra de navegación y menú móvil</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;section id="inicio"&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Hero banner y accesos directos</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;section id="proyectos"&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Galería interactiva y Canvas p5.js</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;section id="teoria"&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Explicación Canvas y p5.js</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;section id="dom-diagrama"&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Diagrama interactivo del DOM</span>
+                                </div>
+                                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                                    <span class="text-indigo-400 font-mono text-xs block font-bold">&lt;footer&gt;</span>
+                                    <span class="text-[11px] text-slate-400">Créditos y pie de página</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center text-sm text-slate-400">
+                <i class="fa-solid fa-circle-info text-indigo-400 mr-1"></i> El DOM representa la página como un árbol de nodos, permitiendo que JavaScript manipule elementos, atributos y estilos dinámicamente.
+            </div>
+        </div>
+    </section>
+
+    <!-- Theoretical Sections -->
+    <section id="teoria" class="py-20 bg-slate-100 border-t border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Fundamentos Teóricos</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Arquitectura de Gráficos Web Estándar</h2>
+                <p class="text-slate-600 mt-2">Exhaustiva explicación de las tecnologías subyacentes utilizadas en la recreación de los dibujos y animaciones.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Theory 1: HTML5 Canvas -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6 shadow-inner">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">1. La Etiqueta HTML <code>&lt;canvas&gt;</code> y el Contexto 2D</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            La etiqueta <code>&lt;canvas&gt;</code> introducida en HTML5 es un contenedor gráfico programable mediante scripts (principalmente JavaScript). A diferencia de los elementos SVG (que se basan en un DOM vectorial), el canvas actúa como una matriz de pixeles de mapa de bits de renderizado inmediato.
+                        </p>
+                        <ul class="space-y-3 text-slate-600 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-indigo-600 mt-1 shrink-0"></i>
+                                <span><strong>El Contexto de Renderizado (`getContext('2d')`):</strong> Para dibujar sobre el canvas, es obligatorio solicitar un contexto 2D. Este objeto expone todas las APIs de dibujo de formas, rectángulos, trazados (paths), texto e imágenes.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-indigo-600 mt-1 shrink-0"></i>
+                                <span><strong>Manipulación de Pixeles:</strong> Permite lectura y escritura directa de búferes de pixeles mediante <code>getImageData()</code> y <code>putImageData()</code>, ideal para filtros avanzados.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-indigo-600 mt-1 shrink-0"></i>
+                                <span><strong>Sistema de Coordenadas:</strong> El origen (0,0) se sitúa por defecto en la esquina superior izquierda, con el eje X positivo hacia la derecha y el eje Y positivo hacia abajo.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto">
+                        <span class="text-slate-500">// Ejemplo nativo de Canvas 2D</span><br>
+                        <span class="text-indigo-400">const</span> canvas = document.getElementById(<span class="text-emerald-300">'myCanvas'</span>);<br>
+                        <span class="text-indigo-400">const</span> ctx = canvas.getContext(<span class="text-emerald-300">'2d'</span>);<br>
+                        ctx.fillStyle = <span class="text-emerald-300">'rgb(79, 70, 229)'</span>;<br>
+                        ctx.fillRect(10, 10, 150, 100);
+                    </div>
+                </div>
+
+                <!-- Theory 2: p5.js Library -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6 shadow-inner">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">2. Fundamentos de la Librería <strong>p5.js</strong></h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            <strong>p5.js</strong> es una biblioteca de JavaScript basada en el espíritu de Processing, diseñada para hacer la programación accesible a artistas, diseñadores y educadores, facilitando la creación de bocetos interactivos en el navegador.
+                        </p>
+                        <ul class="space-y-3 text-slate-600 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-violet-600 mt-1 shrink-0"></i>
+                                <span><strong>Funciones Principales (`setup` y `draw`):</strong> <code>setup()</code> se ejecuta una sola vez al cargar la página para inicializar configuraciones y tamaños del lienzo. <code>draw()</code> se ejecuta en un bucle continuo (normalmente a 60 FPS), ideal para animaciones fluidas.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-violet-600 mt-1 shrink-0"></i>
+                                <span><strong>Abstracción del Contexto:</strong> Simplifica el dibujo complejo de canvas mediante funciones intuitivas como <code>ellipse()</code>, <code>rect()</code>, <code>beginShape()</code> y control completo de colores (<code>fill()</code>, <code>stroke()</code>).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-violet-600 mt-1 shrink-0"></i>
+                                <span><strong>Eventos Nativo-Integrados:</strong> Captura sencilla de interacción del usuario mediante variables como <code>mouseX</code>, <code>mouseY</code> o escuchadores como <code>mousePressed()</code>.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto">
+                        <span class="text-slate-500">// Estructura básica en p5.js</span><br>
+                        <span class="text-indigo-400">function</span> <span class="text-yellow-300">setup</span>() {<br>
+                        &nbsp;&nbsp;createCanvas(400, 400);<br>
+                        }<br>
+                        <span class="text-indigo-400">function</span> <span class="text-yellow-300">draw</span>() {<br>
+                        &nbsp;&nbsp;background(220);<br>
+                        &nbsp;&nbsp;ellipse(mouseX, mouseY, 50, 50);<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment & Submission Guide Section -->
+    <section id="despliegue" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Paso a Paso</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Guía de Despliegue y Entrega en GitHub Pages</h2>
+                <p class="text-slate-600 mt-2">Instrucciones claras para alojar y publicar este código fuente de forma gratuita y pública.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                    <div class="absolute -top-4 left-8 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow">1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">Crear Repositorio en GitHub</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Crea un nuevo repositorio público en tu cuenta de GitHub (por ejemplo, nombrado <code>khan-portfolio-web</code>). Sube los archivos fuente (<code>index.html</code>, <code>style.css</code>, <code>script.js</code>) conteniendo la estructura completa del sitio.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                    <div class="absolute -top-4 left-8 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow">2</div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">Habilitar GitHub Pages</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Dirígete a la pestaña <strong>Settings</strong> de tu repositorio, busca la sección <strong>Pages</strong> en el menú lateral, y selecciona la rama principal (<code>main</code> o <code>master</code>) como fuente de publicación (Deploy from a branch).
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                    <div class="absolute -top-4 left-8 bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow">3</div>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">Obtener URL y Entrega</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        GitHub te proporcionará la URL pública de tu sitio web en funcionamiento (ej. <code>https://tu-usuario.github.io/khan-portfolio-web/</code>). Envía únicamente dicha URL a través del canal de entrega correspondiente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-white text-lg">Portafolio Khan Academy</span>
+                    <span class="block text-xs text-slate-500">HTML5 Canvas & p5.js Standard Implementation</span>
+                </div>
+            </div>
+            <p class="text-sm text-slate-500 text-center md:text-right">
+                Desarrollado como solución académica estándar para gráficos web interactivos.<br>
+                Basado en los proyectos oficiales de Khan Academy.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script src="script.js"></script>
+</body>
+</html>

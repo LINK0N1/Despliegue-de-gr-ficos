@@ -1,0 +1,11 @@
+/* Custom smooth styling and scrollbars */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+.canvas-container canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
